@@ -1,72 +1,969 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website Mock Up</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>B. Blair Corporation – Heavy Haul Trucking</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0e1f3b;
+      --navy-light: #1a3158;
+      --blue: #1e4080;
+      --orange: #e8920f;
+      --orange-dark: #c97c0a;
+      --white: #ffffff;
+      --gray-bg: #f5f5f5;
+      --gray-text: #555;
+      --border: #ddd;
     }
 
-    body {
-      background: #f4f4f4;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #222; line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--orange); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .btn-quote {
+      background: var(--orange);
+      color: var(--white) !important;
+      padding: 0.5rem 1.1rem;
+      border-radius: 4px;
+      transition: background 0.2s !important;
+    }
+    .btn-quote:hover { background: var(--orange-dark) !important; color: var(--white) !important; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; font-size: 1.5rem; color: var(--navy); }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--white);
+      padding: 1rem 2rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .mobile-menu a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+    }
+    .mobile-menu.open { display: flex; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, #2a5298 100%);
+      color: var(--white);
+      padding: 3rem 2rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 2rem;
+    }
+    .hero-phone {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      opacity: 0.8;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+    .hero-phone strong { font-size: 1.4rem; letter-spacing: 0.03em; display: block; color: var(--white); }
+    .hero-region {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.75;
+      margin-bottom: 0.75rem;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .hero p { font-size: 0.95rem; opacity: 0.85; margin-bottom: 1.5rem; max-width: 420px; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+      padding: 0.7rem 1.5rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .btn-primary:hover { background: var(--orange-dark); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      padding: 0.7rem 1.5rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-image img {
+      width: 100%;
+      max-width: 480px;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.4));
+      border-radius: 8px;
+    }
+    .hero-truck-placeholder {
+      width: 100%;
+      max-width: 480px;
+      height: 260px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--navy);
+      color: var(--white);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+    }
+    .stat {
+      flex: 1;
+      max-width: 220px;
+      text-align: center;
+      padding: 1.2rem 1rem;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--orange);
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.75;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 4rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--orange);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    h2 { font-size: 1.9rem; font-weight: 900; line-height: 1.2; color: var(--navy); margin-bottom: 1rem; }
+    .lead { font-size: 1rem; color: var(--gray-text); max-width: 680px; margin-bottom: 1.5rem; }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .about-text p { color: var(--gray-text); margin-bottom: 1rem; font-size: 0.95rem; }
+
+    /* ── WHY TRUST ── */
+    .why-trust {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .why-trust h2 { color: var(--white); text-align: center; }
+    .why-trust .lead { color: rgba(255,255,255,0.7); text-align: center; margin: 0 auto 2.5rem; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .feature-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-3px); }
+    .feature-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .feature-card h3 { font-size: 0.95rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--white); }
+    .feature-card p { font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.5; }
+
+    /* ── INDUSTRIES ── */
+    .industries { background: var(--gray-bg); }
+    .industry-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 1.5rem;
+    }
+    .industry-table th {
+      background: var(--navy);
+      color: var(--white);
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .industry-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      color: #444;
+    }
+    .industry-table tr:nth-child(even) td { background: #ececec; }
+    .industry-table tr:hover td { background: #e0e8f5; }
+    .industry-table td:first-child { font-weight: 700; color: var(--navy); }
+
+    /* ── FLEET CAROUSEL ── */
+    .fleet { background: var(--white); }
+    .fleet-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .fleet-text p { color: var(--gray-text); font-size: 0.95rem; margin-bottom: 1rem; }
+    .carousel {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #111;
+    }
+    .carousel-slide {
+      display: none;
+      position: relative;
+    }
+    .carousel-slide.active { display: block; }
+    .carousel-slide .slide-img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      background: linear-gradient(135deg, #2a2a2a, #444);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 4rem;
+    }
+    .slide-placeholder {
+      width: 100%;
+      height: 260px;
+      background: linear-gradient(135deg, #1a2940, #2a4070);
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
-      padding: 2rem 1rem;
+      justify-content: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 3rem;
+      gap: 0.5rem;
     }
-
-    h1 {
-      font-size: 1.5rem;
-      color: #333;
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.02em;
-    }
-
-    .mockup-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 900px;
-      height: 0;
-      padding-top: 100%;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .mockup-wrapper iframe {
+    .slide-label {
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      right: 0;
+      background: rgba(0,0,0,0.6);
+      color: var(--white);
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      background: #111;
+    }
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      cursor: pointer;
       border: none;
+      transition: background 0.2s;
+    }
+    .dot.active { background: var(--orange); }
+
+    /* ── SERVICE AREA ── */
+    .service-area { background: var(--gray-bg); }
+    .area-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .area-text p { color: var(--gray-text); font-size: 0.95rem; margin-bottom: 1rem; }
+    .map-placeholder {
+      background: #d0d8e8;
+      border-radius: 8px;
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      color: var(--navy);
+      opacity: 0.4;
+    }
+    .states-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .state-badge {
+      background: var(--navy);
+      color: var(--white);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
     }
 
+    /* ── HOW IT WORKS ── */
+    .how-it-works { background: var(--navy-light); color: var(--white); }
+    .how-it-works h2 { color: var(--white); }
+    .how-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .how-title { font-size: 2.2rem; font-weight: 900; line-height: 1.2; }
+    .steps { display: flex; flex-direction: column; gap: 1.5rem; }
+    .step { display: flex; gap: 1rem; }
+    .step-num {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: var(--white);
+      font-weight: 900;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step h3 { font-size: 1rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .step p { font-size: 0.88rem; color: rgba(255,255,255,0.7); }
+
+    /* ── FOOTER CTA ── */
+    .footer-cta {
+      background: var(--gray-bg);
+      text-align: center;
+      padding: 3.5rem 2rem;
+      border-top: 4px solid var(--orange);
+    }
+    .footer-cta h2 { font-size: 2rem; margin-bottom: 0.75rem; }
+    .footer-cta p { color: var(--gray-text); margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .footer-cta-btns { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .btn-navy {
+      background: var(--navy);
+      color: var(--white);
+      padding: 0.75rem 1.8rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .btn-navy:hover { background: #0a1628; }
+
+    /* ── FOOTER ── */
     footer {
-      margin-top: 1.5rem;
-      font-size: 0.85rem;
-      color: #888;
+      background: var(--navy);
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      padding: 1.5rem 2rem;
+      font-size: 0.8rem;
+    }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+    }
+    .modal h3 { font-size: 1.4rem; font-weight: 900; color: var(--navy); margin-bottom: 0.25rem; }
+    .modal p { color: var(--gray-text); font-size: 0.88rem; margin-bottom: 1.25rem; }
+    .modal-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: none; border: none;
+      font-size: 1.3rem; cursor: pointer; color: #999;
+    }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.3rem; color: var(--navy); text-transform: uppercase; letter-spacing: 0.04em; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.6rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { outline: none; border-color: var(--blue); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .form-submit {
+      width: 100%;
+      padding: 0.8rem;
+      background: var(--orange);
+      color: var(--white);
+      border: none;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover { background: var(--orange-dark); }
+    .success-msg { display: none; text-align: center; padding: 1rem 0; }
+    .success-msg .checkmark { font-size: 3rem; margin-bottom: 0.5rem; }
+    .success-msg h4 { color: var(--navy); font-size: 1.2rem; }
+    .success-msg p { color: var(--gray-text); font-size: 0.88rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .hero-inner, .about-grid, .fleet-grid, .area-grid, .how-grid { grid-template-columns: 1fr; }
+      .hero-truck-placeholder { display: none; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      h2 { font-size: 1.5rem; }
+      .hero h1 { font-size: 1.8rem; }
+      .stats-bar { flex-wrap: wrap; }
+      .stat { min-width: 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .how-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .industry-table { font-size: 0.78rem; }
+      .industry-table th, .industry-table td { padding: 0.5rem 0.6rem; }
+      .form-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <h1>Website Mock Up</h1>
 
-  <div class="mockup-wrapper">
-    <iframe
-      loading="lazy"
-      src="https://www.canva.com/design/DAHJpDTVwV4/gbpyZoGGquY6Y6zNGW69Sg/view?embed"
-      allowfullscreen="allowfullscreen"
-      allow="fullscreen"
-    ></iframe>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">B.<span>BLAIR</span></a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#industries">Our Projects</a></li>
+    <li><a href="#fleet">Our Equipment</a></li>
+    <li><a href="#" class="btn-quote" onclick="openModal(); return false;">Get a Quote</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">About Us</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#industries" onclick="closeMenu()">Industries</a>
+  <a href="#fleet" onclick="closeMenu()">Our Equipment</a>
+  <a href="#" onclick="openModal(); closeMenu(); return false;" style="color: var(--orange);">Get a Quote</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-phone">
+        Next-Day Availability · Call Before 2 PM<br>
+        <strong>215-672-8787</strong>
+      </div>
+      <div class="hero-region">Pennsylvania · New Jersey · Delaware · Heavy Hauling</div>
+      <h1>One Call. The Right Truck. On the Road Tomorrow.</h1>
+      <p>400+ owned pieces of equipment. The Mid-Atlantic's #1 permit services.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn-primary" onclick="openModal(); return false;">Request a Quote</a>
+        <a href="#about" class="btn-secondary">Learn More</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="hero-truck-placeholder">🚛</div>
+    </div>
   </div>
+</section>
 
-  <footer>Design by Jessica Wortelmann</footer>
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-num">25+</div>
+    <div class="stat-label">Years Proven Track Record</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">400+</div>
+    <div class="stat-label">Pieces Owned Equipment</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">No Brokers</div>
+    <div class="stat-label">Eco-Best Performed</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">Next Day</div>
+    <div class="stat-label">Availability</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-tag">About B. Blair</div>
+        <h2>The Heavy Haul Partner You Can Count On</h2>
+        <a href="#" class="btn-primary" onclick="openModal(); return false;" style="display:inline-block; margin-bottom:1.5rem;">Learn More</a>
+      </div>
+      <div>
+        <p style="color:#555; font-size:0.95rem; margin-bottom:1rem;">When you need heavy equipment moved, you don't have time to chase down a hauler who might not show up, doesn't have the right trailer, or is farming your job out. That's how we do things at Blair.</p>
+        <p style="color:#555; font-size:0.95rem; margin-bottom:1rem;">For more than 25 years, B. Blair Corporation has been one of the most trusted names in heavy and specialized hauling across the region. We own every truck, every trailer, and every piece of equipment in our fleet — over 400 pieces and growing. When you call us, we dispatch our driver, in our truck, with our trailer. No middlemen. No surprises.</p>
+        <p style="color:#555; font-size:0.95rem;">We've built our reputation the old-fashioned way: by showing up, getting it done, and earning the next call. Whether it's a single crane move or a multi-event project hauling precast beams, the promise is the same — your load gets where it needs to go, safely and on schedule.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY TRUST -->
+<section class="why-trust" id="services">
+  <div class="container">
+    <div class="section-tag" style="text-align:center; color:#f5a623;">Why Choose Us</div>
+    <h2>Why Companies Trust B. Blair With<br>Their Most Critical Loads</h2>
+    <p class="lead">A lot of haulers will tell you they can handle it. Here's what makes us different.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🚛</div>
+        <h3>400+ Owned Pieces of Equipment</h3>
+        <p>No renting. No surprises. We own every truck and every trailer in our fleet.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⏱️</div>
+        <h3>Next-Day Availability</h3>
+        <p>Call before 2 PM and we're on the road tomorrow.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✅</div>
+        <h3>100% Self-Performed</h3>
+        <p>No brokers. No subcontractors. No middlemen. When you hire B. Blair, you get B. Blair.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏗️</div>
+        <h3>In-House Loading &amp; Unloading</h3>
+        <p>Our crew is trained to safely load and unload equipment on-site.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📐</div>
+        <h3>Multiple Trailer Configurations</h3>
+        <p>Lowboys, step decks, RGNs, flatbeds, double drops, multi-axle — we have the right setup for your load.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>Permit Services</h3>
+        <p>Everything covered. We handle the permitting, route planning, and escorts so you don't have to.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="industries" id="industries">
+  <div class="container">
+    <div class="section-tag">Industries We Serve</div>
+    <h2>Built for the Industries That<br>Can't Afford Delays</h2>
+    <p class="lead">We work with companies where a missed heavy haul means a missed deadline — and a missed deadline means real money. If your business depends on heavy equipment getting where it needs to be, on time, every time, we're exactly who you should be calling.</p>
+    <table class="industry-table">
+      <thead>
+        <tr>
+          <th>Industry</th>
+          <th>What We Move</th>
+          <th>Why They Choose Us</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Crane &amp; Rigging Companies</td>
+          <td>Cranes, rigging equipment, heavy lift gear between job sites</td>
+          <td>Next-day response, trained load/unload crews, every trailer configuration they need</td>
+        </tr>
+        <tr>
+          <td>Equipment Dealers &amp; Rental Companies</td>
+          <td>Sold and rented heavy equipment — excavators, loaders, dozers, lifts</td>
+          <td>High-volume capacity, reliable scheduling that matches their sales timelines</td>
+        </tr>
+        <tr>
+          <td>Drilling &amp; Foundation Companies</td>
+          <td>Drill rigs, boring equipment, pile drivers, geotechnical equipment</td>
+          <td>Flexibility when project schedules shift, fleet depth for multiple rig moves</td>
+        </tr>
+        <tr>
+          <td>Precast &amp; Concrete Companies</td>
+          <td>Precast beams, panels, vaults, concrete structures</td>
+          <td>Precision delivery timed to crane schedules, damage-free transport of irreplaceable pieces</td>
+        </tr>
+        <tr>
+          <td>Site Contractors &amp; General Contractors</td>
+          <td>Excavators, loaders, dozers, compactors across active job sites</td>
+          <td>One hauling partner for all mobilization and demobilization needs — rain or shine</td>
+        </tr>
+        <tr>
+          <td>Steel Manufacturers &amp; Fabricators</td>
+          <td>Structural steel, beams, columns, plate, fabricated assemblies</td>
+          <td>Specialized trailer configs for oversized members, delivery timed to erection crews</td>
+        </tr>
+        <tr>
+          <td>Demolition Companies</td>
+          <td>Excavators with attachments, crushers, screening plants, debris equipment</td>
+          <td>Reliability when demo timelines shift unexpectedly, diverse trailer fleet for non-standard loads</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FLEET -->
+<section class="fleet" id="fleet">
+  <div class="container">
+    <div class="fleet-grid">
+      <div class="fleet-text">
+        <div class="section-tag">Our Fleet</div>
+        <h2>One of the Largest Privately Owned Heavy Haul Fleets in the Region</h2>
+        <p>Our fleet isn't something we lease from somebody else. Every truck, every trailer, every piece of hauling equipment is purchased, maintained, and operated by B. Blair. That's over 400 pieces of equipment — and we're still buying.</p>
+        <p>What that means for you: when we say we have the right trailer for your load, we actually do. When we say we can get there tomorrow, we're not calling around trying to find availability. We're dispatching from our own yard.</p>
+      </div>
+      <div>
+        <div class="carousel" id="carousel">
+          <div class="carousel-slide active">
+            <div class="slide-placeholder">🚛<span style="font-size:0.9rem; font-weight:700;">LOWBOY TRAILERS</span></div>
+            <div class="slide-label">Lowboy Trailers</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder">🏗️<span style="font-size:0.9rem; font-weight:700;">STEP DECK TRAILERS</span></div>
+            <div class="slide-label">Step Deck Trailers</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder">📦<span style="font-size:0.9rem; font-weight:700;">FLATBED TRAILERS</span></div>
+            <div class="slide-label">Flatbed Trailers</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder">⚙️<span style="font-size:0.9rem; font-weight:700;">RGN / REMOVABLE GOOSENECK</span></div>
+            <div class="slide-label">RGN / Removable Gooseneck</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder">🔩<span style="font-size:0.9rem; font-weight:700;">MULTI-AXLE CONFIGURATIONS</span></div>
+            <div class="slide-label">Multi-Axle Configurations</div>
+          </div>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section class="service-area">
+  <div class="container">
+    <div class="area-grid">
+      <div class="area-text">
+        <div class="section-tag">Service Area</div>
+        <h2>One of the Largest Privately Owned Heavy Haul Fleets in the Region</h2>
+        <p>Moving oversized or overweight loads means more than just having the right truck. You need the right permits, the right routes, the right escort vehicles and pilot cars to make it all legal and safe.</p>
+        <p>B. Blair handles all of it. We provide full permit services for oversize and overweight loads across Pennsylvania, New Jersey, Delaware, Maryland, and beyond. We coordinate all permit applications and communicate directly between your hauler and your permit campaign — it's all under one roof.</p>
+        <div class="states-list">
+          <span class="state-badge">Pennsylvania</span>
+          <span class="state-badge">New Jersey</span>
+          <span class="state-badge">Delaware</span>
+          <span class="state-badge">Maryland</span>
+          <span class="state-badge">Virginia</span>
+          <span class="state-badge">New York</span>
+        </div>
+      </div>
+      <div class="map-placeholder">🗺️</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works">
+  <div class="container">
+    <div class="section-tag" style="color:#f5a623;">How It Works</div>
+    <div class="how-grid">
+      <div>
+        <h2 class="how-title" style="color:white;">Getting Started Is Simple</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Tell Us What You Need Moved</h3>
+            <p>Call, email, or fill out the form. Let us know what you're hauling, where it's going, when it needs to be there.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>We'll Handle the Details</h3>
+            <p>We match the right truck and trailer to your load — often within hours. Permits, route planning, scheduling — we handle it all around your timeline.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>We Show Up and Get It Done</h3>
+            <p>Our driver arrives on time, in our truck, with our trailer. Your load gets where it needs to go — safely and on schedule.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="footer-cta">
+  <div class="container">
+    <h2>Ready to Move Something?</h2>
+    <p>Whether it's one crane or a hundred, we're here to help. Tell us what you need moved and we'll get you a quote — usually the same day.</p>
+    <div class="footer-cta-btns">
+      <a href="#" class="btn-primary" onclick="openModal(); return false;">Request a Quote</a>
+      <a href="tel:2156725787" class="btn-navy">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2024 B. Blair Corporation. All rights reserved. &nbsp;|&nbsp; <a href="tel:2156725787">215-672-5787</a></p>
+</footer>
+
+<!-- QUOTE MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+    <div id="modalForm">
+      <h3>Request a Quote</h3>
+      <p>Fill out the form and we'll get back to you — usually the same day.</p>
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="John" required />
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Company</label>
+          <input type="text" placeholder="Your company name" />
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" placeholder="(215) 555-0100" required />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="you@company.com" required />
+        </div>
+        <div class="form-group">
+          <label>What do you need moved?</label>
+          <select>
+            <option value="">Select equipment type...</option>
+            <option>Crane / Rigging Equipment</option>
+            <option>Excavator / Dozer</option>
+            <option>Drill Rig</option>
+            <option>Steel / Structural</option>
+            <option>Generator / Industrial Equipment</option>
+            <option>Other Heavy Equipment</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Additional Details</label>
+          <textarea rows="3" placeholder="Origin, destination, timeline, dimensions..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Submit Request</button>
+      </form>
+    </div>
+    <div class="success-msg" id="successMsg">
+      <div class="checkmark">✅</div>
+      <h4>Request Received!</h4>
+      <p>Thanks — we'll be in touch shortly, usually within a few hours.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // Modal
+  function openModal() {
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      document.getElementById('modalForm').style.display = '';
+      document.getElementById('successMsg').style.display = 'none';
+    }, 300);
+  }
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('modalForm').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  }
+
+  // Carousel
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dotsContainer = document.getElementById('carouselDots');
+  let current = 0;
+  let timer;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+    dot.onclick = () => goTo(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+    resetTimer();
+  }
+
+  function next() { goTo((current + 1) % slides.length); }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(next, 4000);
+  }
+
+  resetTimer();
+
+  // Smooth anchor scroll offset for sticky nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = 72;
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
 </body>
 </html>
